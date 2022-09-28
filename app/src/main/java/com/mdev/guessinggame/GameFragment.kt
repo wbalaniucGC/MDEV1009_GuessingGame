@@ -24,10 +24,14 @@ class GameFragment : Fragment() {
         val view = binding.root;
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
+        binding.gameViewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
         // No longer need to manually update the screen.
         // updateScreen()
 
         // Observing view model variables for changes and reacting to the change
+        /*
         viewModel.incorrectGuesses.observe(viewLifecycleOwner, Observer { newValue ->
             binding.incorrectGuesses.text = "Incorrect guesses: $newValue"
         })
@@ -37,6 +41,7 @@ class GameFragment : Fragment() {
         viewModel.secretWordDisplay.observe(viewLifecycleOwner, Observer { newValue ->
             binding.word.text = newValue
         })
+        */
         viewModel.gameOver.observe(viewLifecycleOwner, Observer { newValue ->
             if(newValue) {
                 val action = GameFragmentDirections.actionGameFragmentToResultFragment(viewModel.wonLostMessage())
